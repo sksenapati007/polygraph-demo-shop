@@ -31,6 +31,10 @@
     .checkout { background: var(--accent); color: var(--accent-fg); }
     .checkout:disabled { opacity: 0.5; cursor: not-allowed; }
     .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .promo { position: fixed; left: 0; right: 0; bottom: 0; background: var(--accent); color: var(--accent-fg);
+      text-align: center; font-weight: 700; padding: 1rem; }
+    .promo p { margin: 0; }
+    @media (max-width: 40rem) { .promo { height: 40vh; display: grid; place-items: center; font-size: 1.25rem; } }
     #status { margin-top: 0.75rem; min-height: 1.5rem; font-weight: 600; color: var(--ok); }
   </style>
 </head>
@@ -55,6 +59,7 @@
       <p id="status" role="status" aria-live="polite"></p>
     </section>
   </main>
+  <aside class="promo" aria-label="Offer"><p>Free samosa with every order over AED 15!</p></aside>
 
   <script type="module">
     const $ = (id) => document.getElementById(id);

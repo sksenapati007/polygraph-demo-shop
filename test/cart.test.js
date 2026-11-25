@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { addItem, total, itemCount } from "../lib/cart.js";
+import { addItem, increment, total, itemCount } from "../lib/cart.js";
 
 test("adds a product to an empty cart", () => {
   const cart = addItem([], "karak");
@@ -19,4 +19,10 @@ test("rejects unknown products", () => {
 
 test("rejects bad quantities", () => {
   assert.throws(() => addItem([], "karak", 0), /positive integer/);
+});
+
+test("adding the same product twice counts it twice", () => {
+  const cart = increment(increment([], "karak"), "karak");
+  assert.deepEqual(cart, [{ id: "karak", qty: 2 }]);
+  assert.equal(total(cart), 8);
 });

@@ -1,7 +1,7 @@
 import http from "node:http";
 import { readFileSync } from "node:fs";
 import { randomUUID } from "node:crypto";
-import { PRODUCTS, addItem, total, itemCount } from "./lib/cart.js";
+import { PRODUCTS, increment, total, itemCount } from "./lib/cart.js";
 
 const PORT = Number(process.env.PORT ?? 3000);
 const page = () => readFileSync(new URL("./public/index.html", import.meta.url));
@@ -50,7 +50,7 @@ http
     if (req.method === "POST" && url.pathname === "/api/cart/add") {
       const { id } = await readBody(req);
       try {
-        addItem(cart, id);
+        increment(cart, id);
         return json(res, 200, view(cart));
       } catch (e) {
         return json(res, 400, { error: e.message });
